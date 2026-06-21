@@ -1,3 +1,44 @@
+server:
+  port: 8081 # Porta dedicada para o microsserviço de pessoas (deixe a 8080 para o BFF orchestrator)
+  servlet:
+    context-path: /
+
 spring:
   application:
-    name: persons
+    name: kinect-persons
+
+  # Configuração da conexão com o Banco de Dados (Postgres)
+  datasource:
+    url: ${DB_PERSONS_URL}
+    username: ${DB_PERSONS_USERNAME}
+    password: ${DB_PERSONS_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    # Configurações otimizadas para o Pool de Conexões (HikariCP)
+    hikari:
+      pool-name: KinectPersonsHikariCP
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+
+  # Configurações do Hibernate / JPA
+  jpa:
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      # Como estamos usando API-First e já temos os scripts SQL prontos,
+      # o ideal em produção/estudos avançados é 'validate' (apenas valida se o Java bate com o Banco)
+      # Se quiser que o Hibernate crie as tabelas sozinho ao subir, mude para 'update'
+      ddl-auto: validate
+    show-sql: true # Mostra os SQLs executados no console (ótimo para estudos)
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG # Ativa o log detalhado de queries
+    org.hibernate.orm.results: TRACE # Se precisar ver os dados retornados do banco

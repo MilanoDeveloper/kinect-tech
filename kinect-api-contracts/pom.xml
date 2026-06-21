@@ -62,6 +62,7 @@
 								<modelPackage>com.kinect.contracts.persons.dto</modelPackage>
 								<apiPackage>com.kinect.contracts.persons.api</apiPackage>
 								<interfaceOnly>true</interfaceOnly>
+								<useTags>true</useTags>
 								<useSpringBoot3>true</useSpringBoot3>
 								<useRecordForModels>true</useRecordForModels>
 							</configOptions>
