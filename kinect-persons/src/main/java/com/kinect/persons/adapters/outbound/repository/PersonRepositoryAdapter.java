@@ -6,6 +6,9 @@ import com.kinect.persons.core.domain.Person;
 import com.kinect.persons.core.ports.outbound.PersonOutputPort;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class PersonRepositoryAdapter implements PersonOutputPort {
 
@@ -22,6 +25,14 @@ public class PersonRepositoryAdapter implements PersonOutputPort {
         PersonEntity entityToSave = personMapper.toEntity(person);
         PersonEntity savedEntity = personRepository.save(entityToSave);
         return personMapper.toDomain(savedEntity);
+    }
+
+    @Override
+    public List<Person> findAll() {
+        return personRepository.findAll()
+                .stream()
+                .map(personMapper::toDomain)
+                .collect(Collectors.toList());
     }
 
     @Override

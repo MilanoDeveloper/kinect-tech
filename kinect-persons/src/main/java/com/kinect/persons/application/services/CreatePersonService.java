@@ -16,7 +16,6 @@ public class CreatePersonService implements CreatePersonUseCase {
 
     @Override
     public void execute(Person person) {
-        // Validações de Regra de Negócio (Domínio)
         if (personOutputPort.existsByUsername(person.getUsername())) {
             throw new IllegalArgumentException("Username already exists");
         }
@@ -26,8 +25,6 @@ public class CreatePersonService implements CreatePersonUseCase {
         if (personOutputPort.existsByEmail(person.getEmail())) {
             throw new IllegalArgumentException("Email already registered");
         }
-
-        // Aqui você aplicaria criptografia na senha (ex: BCryptEncoder) antes de salvar
 
         personOutputPort.save(person);
     }

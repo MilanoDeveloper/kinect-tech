@@ -20,6 +20,22 @@ paths:
           description: Person created successfully
         '400':
           description: Invalid input data
+    get:
+      summary: Get Information from all persons
+      operationId: getPersons
+      tags:
+        - Persons
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetPersonsApi'
+        '400':
+          description: Bad Request
 
 components:
   schemas:
@@ -58,6 +74,33 @@ components:
           type: string
           minLength: 11
           maxLength: 11
+        email:
+          type: string
+          format: email
+        internalPersonal:
+          type: boolean
+        cref:
+          type: string
+        note:
+          type: string
+    GetPersonsApi:
+      type: object
+      properties:
+        username:
+          type: string
+        name:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        gender:
+          type: string
+          enum: [M, F]
+        personType:
+          type: string
+          enum: [ALUNO, PERSONAL, ADMIN]
+        cpf:
+          type: string
         email:
           type: string
           format: email

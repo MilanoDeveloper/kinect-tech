@@ -1,6 +1,7 @@
 package com.kinect.persons.adapters.mapper;
 
 import com.kinect.contracts.persons.dto.CreatePersonRequest;
+import com.kinect.contracts.persons.dto.GetPersonsApi;
 import com.kinect.persons.adapters.outbound.repository.entity.PersonEntity;
 import com.kinect.persons.core.domain.Person;
 import org.mapstruct.Mapper;
@@ -18,4 +19,6 @@ public interface PersonMapper {
     PersonEntity toEntity(Person person);
 
     Person toDomain(PersonEntity entity);
+
+    GetPersonsApi toResponse(Person person);
 }
