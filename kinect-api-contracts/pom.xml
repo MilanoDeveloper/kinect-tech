@@ -109,6 +109,34 @@
 						</configuration>
 					</execution>
 
+					<execution>
+						<id>generate-orchestrator-contracts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/java/kinect/api/contracts/kinect-orchestrator/openapi.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>com.kinect.contracts.orchestrator.api</apiPackage>
+							<modelPackage>com.kinect.contracts.orchestrator.dto</modelPackage>
+							<generateModels>false</generateModels>
+							<importMappings>
+								<importMapping>CreatePersonRequest=com.kinect.contracts.persons.dto.CreatePersonRequest</importMapping>
+								<importMapping>GetPersonsApi=com.kinect.contracts.persons.dto.GetPersonsApi</importMapping>
+								<importMapping>PaymentRequest=com.kinect.contracts.payments.dto.PaymentRequest</importMapping>
+								<importMapping>Payment=com.kinect.contracts.payments.dto.Payment</importMapping>
+								<importMapping>TrainingProgramRequest=com.kinect.contracts.trainingprograms.dto.TrainingProgramRequest</importMapping>
+								<importMapping>TrainingProgram=com.kinect.contracts.trainingprograms.dto.TrainingProgram</importMapping>
+							</importMappings>
+							<configOptions>
+								<basePackage>com.kinect.contracts.orchestrator</basePackage>
+								<interfaceOnly>true</interfaceOnly>
+								<useTags>true</useTags>
+								<useSpringBoot3>true</useSpringBoot3>
+							</configOptions>
+						</configuration>
+					</execution>
+
 				</executions>
 			</plugin>
 		</plugins>

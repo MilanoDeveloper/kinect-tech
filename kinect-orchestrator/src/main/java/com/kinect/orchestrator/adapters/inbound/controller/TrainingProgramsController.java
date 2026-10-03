@@ -1,6 +1,6 @@
 package com.kinect.orchestrator.adapters.inbound.controller;
 
-import com.kinect.contracts.trainingprograms.api.TrainingProgramsApi;
+import com.kinect.contracts.orchestrator.api.TrainingProgramsApi;
 import com.kinect.contracts.trainingprograms.dto.TrainingProgram;
 import com.kinect.contracts.trainingprograms.dto.TrainingProgramRequest;
 import com.kinect.orchestrator.application.port.in.GymOperationsUseCase;

@@ -20,7 +20,7 @@ paths:
               amount: 149.90
               method: PIX
               installmentCount: 1
-              dueDate: '2026-11-03'
+              dueDate: '03112026'
               status: PENDING
               description: Mensalidade da academia
       responses:
@@ -46,11 +46,11 @@ paths:
                   amount: 149.90
                   method: PIX
                   installmentCount: 1
-                  dueDate: '2026-11-03'
+                  dueDate: '03112026'
                   status: PENDING
                   description: Mensalidade da academia
-                  createdAt: '2026-10-03T12:00:00Z'
-                  updatedAt: '2026-10-03T12:00:00Z'
+                  createdAt: '03102026'
+                  updatedAt: '03102026'
   /api/v1/payments/{paymentId}:
     parameters:
       - name: paymentId
@@ -78,11 +78,11 @@ paths:
                 amount: 149.90
                 method: PIX
                 installmentCount: 1
-                dueDate: '2026-11-03'
+                dueDate: '03112026'
                 status: PENDING
                 description: Mensalidade da academia
-                createdAt: '2026-10-03T12:00:00Z'
-                updatedAt: '2026-10-03T12:00:00Z'
+                createdAt: '03102026'
+                updatedAt: '03102026'
         '404':
           description: Payment not found
     put:
@@ -101,7 +101,7 @@ paths:
               amount: 149.90
               method: PIX
               installmentCount: 1
-              dueDate: '2026-11-03'
+              dueDate: '03112026'
               status: PENDING
               description: Mensalidade da academia
       responses:
@@ -149,10 +149,10 @@ components:
         dueDate:
           type: string
           format: date
-          example: '2026-11-03'
+          example: '03112026'
         paidAt:
           type: string
-          format: date-time
+          format: date
         status:
           type: string
           enum: [PENDING, PAID, OVERDUE, CANCELLED]
@@ -173,9 +173,9 @@ components:
               example: 1
             createdAt:
               type: string
-              format: date-time
-              example: '2026-10-03T12:00:00Z'
+              format: date
+              example: '03102026'
             updatedAt:
               type: string
-              format: date-time
-              example: '2026-10-03T12:00:00Z'
+              format: date
+              example: '03102026'

@@ -19,7 +19,7 @@ paths:
               username: maria.silva
               password: SenhaSegura123
               name: Maria Silva
-              birthDate: '1995-04-12'
+              birthDate: '12041995'
               gender: F
               personType: ALUNO
               cpf: '52998224725'
@@ -54,7 +54,7 @@ paths:
                 - id: 1
                   username: maria.silva
                   name: Maria Silva
-                  birthDate: '1995-04-12'
+                  birthDate: '12041995'
                   gender: F
                   personType: ALUNO
                   cpf: '52998224725'
@@ -64,8 +64,8 @@ paths:
                   weight: 64.5
                   bodyFatPercentage: 22.4
                   medicalConditions: []
-                  createdAt: '2026-10-03T12:00:00Z'
-                  updatedAt: '2026-10-03T12:00:00Z'
+                  createdAt: '03102026'
+                  updatedAt: '03102026'
         '400':
           description: Bad Request
   /api/v1/persons/{personId}:
@@ -93,7 +93,7 @@ paths:
                 id: 1
                 username: maria.silva
                 name: Maria Silva
-                birthDate: '1995-04-12'
+                birthDate: '12041995'
                 gender: F
                 personType: ALUNO
                 cpf: '52998224725'
@@ -103,8 +103,8 @@ paths:
                 weight: 64.5
                 bodyFatPercentage: 22.4
                 medicalConditions: []
-                createdAt: '2026-10-03T12:00:00Z'
-                updatedAt: '2026-10-03T12:00:00Z'
+                createdAt: '03102026'
+                updatedAt: '03102026'
         '404':
           description: Person not found
     put:
@@ -122,7 +122,7 @@ paths:
               username: maria.silva
               password: SenhaSegura123
               name: Maria Silva
-              birthDate: '1995-04-12'
+              birthDate: '12041995'
               gender: F
               personType: ALUNO
               cpf: '52998224725'
@@ -180,7 +180,7 @@ components:
         birthDate:
           type: string
           format: date
-          example: '1995-04-12'
+          example: '12041995'
         gender:
           type: string
           enum: [M, F]
@@ -244,7 +244,7 @@ components:
         birthDate:
           type: string
           format: date
-          example: '1995-04-12'
+          example: '12041995'
         gender:
           type: string
           enum: [M, F]
@@ -288,9 +288,9 @@ components:
           example: []
         createdAt:
           type: string
-          format: date-time
-          example: '2026-10-03T12:00:00Z'
+          format: date
+          example: '03102026'
         updatedAt:
           type: string
-          format: date-time
-          example: '2026-10-03T12:00:00Z'
+          format: date
+          example: '03102026'

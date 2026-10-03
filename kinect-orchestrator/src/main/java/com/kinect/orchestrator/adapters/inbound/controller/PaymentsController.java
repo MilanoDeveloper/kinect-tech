@@ -1,6 +1,6 @@
 package com.kinect.orchestrator.adapters.inbound.controller;
 
-import com.kinect.contracts.payments.api.PaymentsApi;
+import com.kinect.contracts.orchestrator.api.PaymentsApi;
 import com.kinect.contracts.payments.dto.Payment;
 import com.kinect.contracts.payments.dto.PaymentRequest;
 import com.kinect.orchestrator.application.port.in.GymOperationsUseCase;

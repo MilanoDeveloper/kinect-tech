@@ -14,6 +14,12 @@ Plataforma de gestão de academia estruturada em microserviços, com contratos A
 
 Cada microserviço é responsável por seu schema. Os nomes de tabela e campos estão definidos pelas entidades JPA. O perfil local cria/atualiza esses objetos durante a inicialização; os demais perfis validam o schema existente.
 
+Datas de negócio e auditoria são representadas como `LocalDate`, persistidas como `DATE` e trafegadas pela API no formato `ddMMyyyy` (por exemplo, `03102026`).
+
+## Massa de dados local
+
+Para gerar um conjunto variado e repetível de dados de demonstração, inicie os serviços uma vez com o perfil local para criar os schemas e tabelas e depois execute `database/seed-demo-data.sql` no banco `kinect-tech` (por exemplo, com `psql -d kinect-tech -f database/seed-demo-data.sql`). O script cria 300 pessoas, 720 pagamentos e 240 programas de treino com exercícios. Os registros têm identificadores `demo.*` ou prefixo `DEMO:`; ao executá-lo novamente, os registros de demonstração são atualizados/recriados sem remover dados que não sejam de demonstração. O script converte colunas de auditoria/pagamento preexistentes de timestamp para `DATE`, descartando a parte de hora conforme o padrão `LocalDate`.
+
 ## Requisitos e banco local
 
 - Java 25

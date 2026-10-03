@@ -61,8 +61,8 @@ paths:
                       sets: 3
                       repetitions: 10
                       restSeconds: 90
-                  createdAt: '2026-10-03T12:00:00Z'
-                  updatedAt: '2026-10-03T12:00:00Z'
+                  createdAt: '03102026'
+                  updatedAt: '03102026'
   /api/v1/training-programs/{trainingProgramId}:
     parameters:
       - name: trainingProgramId
@@ -99,8 +99,8 @@ paths:
                     sets: 3
                     repetitions: 10
                     restSeconds: 90
-                createdAt: '2026-10-03T12:00:00Z'
-                updatedAt: '2026-10-03T12:00:00Z'
+                createdAt: '03102026'
+                updatedAt: '03102026'
         '404':
           description: Training program not found
     put:
@@ -205,9 +205,9 @@ components:
               example: 1
             createdAt:
               type: string
-              format: date-time
-              example: '2026-10-03T12:00:00Z'
+              format: date
+              example: '03102026'
             updatedAt:
               type: string
-              format: date-time
-              example: '2026-10-03T12:00:00Z'
+              format: date
+              example: '03102026'

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +32,11 @@ public class TrainingProgramEntity {
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime createdAt;
+    private LocalDate createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updatedAt;
+    private LocalDate updatedAt;
 
     public Long getId() { return id; }
     public Long getStudentId() { return studentId; }
@@ -47,6 +47,6 @@ public class TrainingProgramEntity {
     public void setName(String name) { this.name = name; }
     public List<ExerciseEntity> getExercises() { return exercises; }
     public void setExercises(List<ExerciseEntity> exercises) { this.exercises = exercises; }
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public OffsetDateTime getUpdatedAt() { return updatedAt; }
+    public LocalDate getCreatedAt() { return createdAt; }
+    public LocalDate getUpdatedAt() { return updatedAt; }
 }
