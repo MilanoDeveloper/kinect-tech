@@ -69,6 +69,46 @@
 						</configuration>
 					</execution>
 
+					<execution>
+						<id>generate-payments-contracts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/java/kinect/api/contracts/kinect-payments/openapi.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<configOptions>
+								<basePackage>com.kinect.contracts</basePackage>
+								<modelPackage>com.kinect.contracts.payments.dto</modelPackage>
+								<apiPackage>com.kinect.contracts.payments.api</apiPackage>
+								<interfaceOnly>true</interfaceOnly>
+								<useTags>true</useTags>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useRecordForModels>true</useRecordForModels>
+							</configOptions>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>generate-training-programs-contracts</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/java/kinect/api/contracts/kinect-trainingprograms/openapi.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<configOptions>
+								<basePackage>com.kinect.contracts</basePackage>
+								<modelPackage>com.kinect.contracts.trainingprograms.dto</modelPackage>
+								<apiPackage>com.kinect.contracts.trainingprograms.api</apiPackage>
+								<interfaceOnly>true</interfaceOnly>
+								<useTags>true</useTags>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useRecordForModels>true</useRecordForModels>
+							</configOptions>
+						</configuration>
+					</execution>
+
 				</executions>
 			</plugin>
 		</plugins>

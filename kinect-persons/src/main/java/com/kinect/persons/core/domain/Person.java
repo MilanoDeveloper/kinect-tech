@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +23,10 @@ public class Person {
     private String cpf;
     private String email;
     private String note;
+    private Double height;
+    private Double weight;
+    private Double bodyFatPercentage;
+    private List<String> medicalConditions;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

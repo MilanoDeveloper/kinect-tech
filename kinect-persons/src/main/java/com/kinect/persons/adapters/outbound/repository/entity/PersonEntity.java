@@ -8,11 +8,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_persons")
+@Table(name = "persons", schema = "persons")
 public class PersonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +51,19 @@ public class PersonEntity {
     private String email;
 
     private String note;
+
+    private Double height;
+
+    private Double weight;
+
+    @Column(name = "body_fat_percentage")
+    private Double bodyFatPercentage;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "person_medical_conditions", schema = "persons",
+            joinColumns = @JoinColumn(name = "person_id"))
+    @Column(name = "medical_condition", nullable = false)
+    private List<String> medicalConditions = new ArrayList<>();
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

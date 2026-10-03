@@ -1,76 +1,66 @@
-# 🏋️‍♂️ Kinect Tech
+# Kinect Tech
 
-The **Kinect Tech** is a modern gym management platform designed with high scalability, availability, and strict isolation of business contexts in mind. This project is built using advanced enterprise architecture patterns, simulating a real-world, high-performance microservices environment.
+Plataforma de gestão de academia estruturada em microserviços, com contratos API First e organização hexagonal (Ports & Adapters).
 
----
+## Serviços
 
-## 🏛️ 1. System Architecture
+| Módulo | Responsabilidade | Porta local | Schema PostgreSQL |
+|---|---|---:|---|
+| `kinect-orchestrator` | API BFF; implementa os casos de uso e coordena chamadas entre serviços | 8080 | — |
+| `kinect-persons` | Cadastro, medidas e condições de saúde de alunos e profissionais | 8081 | `persons` |
+| `kinect-payments` | Pagamentos, método, parcelas, vencimento e liquidação | 8082 | `payments` |
+| `kinect-trainingprograms` | Treinos, exercícios, aluno e personal responsável | 8083 | `trainingprograms` |
+| `kinect-api-contracts` | Especificações OpenAPI e interfaces/modelos Java gerados | — | — |
 
-The ecosystem is based on a **Microservices** architecture, adhering to the **API First** (Design-First) philosophy. It implements **Hexagonal Architecture (Ports & Adapters)** combined with **Clean Architecture** guidelines and **DDD (Domain-Driven Design)** principles.
+Cada microserviço é responsável por seu schema. Os nomes de tabela e campos estão definidos pelas entidades JPA. O perfil local cria/atualiza esses objetos durante a inicialização; os demais perfis validam o schema existente.
 
-### 🔄 Project Components & Flow
-* **`kinect-api-contracts`**: A shared library that centralizes and distributes API contracts automatically generated via OpenAPI/Swagger.
-* **`kinect-orchestrator`**: The BFF (Backend-For-Frontend) tasked with unifying communication with the Frontend (Angular) and centralizing JWT security.
-* **`kinect-persons`**: An isolated microservice responsible for managing users (Students, Trainers/Personals, and Admins) and health questionnaires.
-* **`kinect-training-programs`**: A microservice dedicated exclusively to the management of workout routines and sheets.
-* **`kinect-payments`**: A microservice handling plans, catalogs, and subscriptions.
+## Requisitos e banco local
 
----
+- Java 25
+- Maven 3.9+
+- PostgreSQL local na porta `5432`
+- Um banco de dados chamado `kinect-tech`
 
-## 🛠️ 2. Tech Stack
+Os arquivos `application.yml` usam variáveis de ambiente obrigatórias para conexão e configuração de produção. Os arquivos `application-local.yml` fornecem defaults apenas para desenvolvimento local (`localhost`, usuário `postgres` e senha `postgres`); altere-os ou defina `DB_URL`, `DB_USERNAME` e `DB_PASSWORD` conforme seu ambiente.
 
-* **Language:** Java 25 (Modern features and maximum performance)
-* **Core Framework:** Spring Boot 3+ (Data JPA, Security, Web)
-* **Database:** PostgreSQL (Using a *Database-per-service* strategy with 3 isolated physical databases)
-* **Contract Generation:** OpenAPI Generator Maven Plugin (Automated generation of Java Records and Interfaces)
-* **Layer Mapping:** MapStruct & Lombok
-* **Dependency Management:** Maven
+## Compilação e execução
 
----
+Gere e instale primeiro os contratos compartilhados:
 
-## 🚀 3. Getting Started Locally
+```powershell
+mvn -f kinect-api-contracts\pom.xml -DskipTests install
+```
 
-### 📋 Prerequisites
-* **Java 25** installed and configured in your environment PATH.
-* **Maven 3.9+** installed.
-* **PostgreSQL** running locally on the default port (`5432`).
+Em terminais separados, inicie os serviços usando o perfil local:
 
-### 🗄️ Step 1: Database Setup
-Make sure to create the three databases in your local PostgreSQL instance using the default credentials configured in the local profile:
-* `kinect_persons_db`
-* `kinect_training_db`
-* `kinect_payments_db`
+```powershell
+mvn -f kinect-persons\pom.xml spring-boot:run "-Dspring-boot.run.profiles=local"
+mvn -f kinect-payments\pom.xml spring-boot:run "-Dspring-boot.run.profiles=local"
+mvn -f kinect-trainingprograms\pom.xml spring-boot:run "-Dspring-boot.run.profiles=local"
+mvn -f kinect-orchestrator\pom.xml spring-boot:run "-Dspring-boot.run.profiles=local"
+```
 
-### ⚙️ Step 2: Compiling the Shared Contracts Library
-Since the microservices rely heavily on the Swagger-generated contracts, you must compile and publish the library to your local Maven repository (`.m2`) first. Open your terminal and run:
+O BFF expõe as rotas abaixo e implementa o CRUD coordenando os serviços responsáveis. Ele não persiste cópias locais: cadastros de pessoas vão para `kinect-persons`, pagamentos para `kinect-payments` e treinos para `kinect-trainingprograms`.
 
-```bash```
-cd kinect-api-contracts
-mvn clean install
+| Recurso | Rotas |
+|---|---|
+| Pessoas | `/api/v1/persons`, `/api/v1/persons/{personId}` |
+| Pagamentos | `/api/v1/payments`, `/api/v1/payments/{paymentId}` |
+| Treinos | `/api/v1/training-programs`, `/api/v1/training-programs/{trainingProgramId}` |
 
-### 🏃‍♂️ Step 3: Running a Microservice (Example: kinect-persons)
+`POST` cria (`201`), `GET` lista ou consulta por id, `PUT` substitui os dados (`204`) e `DELETE` remove (`204`). Consultas ou alterações de ids inexistentes retornam `404`.
 
-Remember create .env files for your enviroment variables
-cd ../kinect-persons
-mvn spring-boot:run -Dspring-boot.run.profiles=local
+Ao criar/atualizar um pagamento ou treino pelo BFF, informe `personId` ou `studentId` no corpo. O orquestrador consulta `kinect-persons` primeiro; se a pessoa não existir, responde `404` e não encaminha a gravação. Se existir, encaminha os dados ao serviço dono do recurso. Assim, a associação entre pessoa e pagamento/treino usa o id, sem compartilhar tabelas entre schemas.
 
+Os contratos OpenAPI em `kinect-api-contracts/src/main/java/kinect/api/contracts/` são a fonte das interfaces implementadas pelos controllers inbound.
 
-### 🧪 4. Testing the API (Persons Module)
-Once the application is up and running, you can test user creation by firing the following curl command directly in your terminal:
+## Documentação Swagger
 
-curl -X POST http://localhost:8081/api/v1/persons \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "johndoe",
-    "password": "secretPassword123",
-    "name": "John Doe",
-    "birthDate": "1995-06-15",
-    "gender": "M",
-    "personType": "ALUNO",
-    "cpf": "12345678901",
-    "email": "johndoe@email.com",
-    "internalPersonal": false,
-    "note": "Beginner student focused on hypertrophy."
-  }'
+O Swagger UI está disponível em cada aplicação:
 
-  Expected Response: HTTP Status 201 Created (Empty body).
+| Aplicação | Swagger UI | Especificação OpenAPI |
+|---|---|---|
+| Orchestrator | `http://localhost:8080/swagger-ui.html` | `http://localhost:8080/v3/api-docs` |
+| Persons | `http://localhost:8081/swagger-ui.html` | `http://localhost:8081/v3/api-docs` |
+| Payments | `http://localhost:8082/swagger-ui.html` | `http://localhost:8082/v3/api-docs` |
+| Training Programs | `http://localhost:8083/swagger-ui.html` | `http://localhost:8083/v3/api-docs` |

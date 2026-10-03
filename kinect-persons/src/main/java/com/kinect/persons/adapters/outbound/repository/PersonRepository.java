@@ -9,4 +9,7 @@ public interface PersonRepository extends JpaRepository<PersonEntity, Long> {
     boolean existsByUsername(String username);
     boolean existsByCpf(String cpf);
     boolean existsByEmail(String email);
+    boolean existsByUsernameAndIdNot(String username, Long id);
+    boolean existsByCpfAndIdNot(String cpf, Long id);
+    boolean existsByEmailAndIdNot(String email, Long id);
 }
