@@ -1,0 +1,12 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: kinect-orchestrator
+
+kinect:
+  services:
+    persons-url: ${PERSONS_SERVICE_URL}
+    payments-url: ${PAYMENTS_SERVICE_URL}
+    training-programs-url: ${TRAINING_PROGRAMS_SERVICE_URL}

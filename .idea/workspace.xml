@@ -5,9 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0512af52-305e-4be5-86b9-18683d016f93" name="Changes" comment="Add FindAll endpoint Contract and implementation">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kinect-persons/src/main/resources/application-local.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kinect-tech.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kinect-tech.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-api-contracts/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-api-contracts/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-api-contracts/src/main/java/kinect/api/contracts/kinect-persons/openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-api-contracts/src/main/java/kinect/api/contracts/kinect-persons/openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-orchestrator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-orchestrator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-orchestrator/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-payments/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-payments/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/inbound/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/inbound/controller/PersonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/mapper/PersonMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/mapper/PersonMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/outbound/repository/PersonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/outbound/repository/PersonRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/outbound/repository/PersonRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/outbound/repository/PersonRepositoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/outbound/repository/entity/PersonEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/adapters/outbound/repository/entity/PersonEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/application/services/CreatePersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/application/services/CreatePersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/core/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/core/domain/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/core/ports/outbound/PersonOutputPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-persons/src/main/java/com/kinect/persons/core/ports/outbound/PersonOutputPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-persons/src/main/resources/application.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kinect-trainingprograms/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/kinect-trainingprograms/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,18 +62,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/repositorios/kinectapp/kinect-tech&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feature/cruds",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/dev/repositorios/kinectapp/kinect-tech",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.build"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\repositorios\kinectapp\kinect-tech" />

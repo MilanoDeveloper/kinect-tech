@@ -31,5 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
-kinect-persons/src/main/resources/application-local.yaml
 .claude/skills/hexagonal-architecture/SKILL.md
+.idea/kinect-tech.iml
+.idea/workspace.xml
+kinect-orchestrator/src/main/resources/application-local.yml
+kinect-payments/src/main/resources/application-local.yml
+kinect-persons/src/main/resources/application-local.yml
+kinect-trainingprograms/src/main/resources/application-local.yml
+.idea/kinect-tech.iml
+.idea/workspace.xml

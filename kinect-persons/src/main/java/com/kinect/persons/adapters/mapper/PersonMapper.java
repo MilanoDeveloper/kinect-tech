@@ -6,6 +6,11 @@ import com.kinect.persons.adapters.outbound.repository.entity.PersonEntity;
 import com.kinect.persons.core.domain.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
@@ -20,5 +25,12 @@ public interface PersonMapper {
 
     Person toDomain(PersonEntity entity);
 
+    @Mapping(target = "createdAt", source = "createdAt", qualifiedByName = "toOffsetDateTime")
+    @Mapping(target = "updatedAt", source = "updatedAt", qualifiedByName = "toOffsetDateTime")
     GetPersonsApi toResponse(Person person);
+
+    @Named("toOffsetDateTime")
+    default OffsetDateTime toOffsetDateTime(LocalDateTime value) {
+        return value == null ? null : value.atOffset(ZoneOffset.UTC);
+    }
 }

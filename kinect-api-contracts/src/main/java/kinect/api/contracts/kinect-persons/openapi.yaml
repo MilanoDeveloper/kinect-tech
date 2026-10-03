@@ -20,6 +20,8 @@ paths:
           description: Person created successfully
         '400':
           description: Invalid input data
+        '409':
+          description: Username, CPF or email already registered
     get:
       summary: Get Information from all persons
       operationId: getPersons
@@ -36,6 +38,56 @@ paths:
                   $ref: '#/components/schemas/GetPersonsApi'
         '400':
           description: Bad Request
+  /api/v1/persons/{personId}:
+    parameters:
+      - name: personId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get a person by id
+      operationId: getPersonById
+      tags:
+        - Persons
+      responses:
+        '200':
+          description: Person found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPersonsApi'
+        '404':
+          description: Person not found
+    put:
+      summary: Update a person
+      operationId: updatePerson
+      tags:
+        - Persons
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePersonRequest'
+      responses:
+        '204':
+          description: Person updated
+        '409':
+          description: Username, CPF or email already registered
+        '404':
+          description: Person not found
+    delete:
+      summary: Delete a person
+      operationId: deletePerson
+      tags:
+        - Persons
+      responses:
+        '204':
+          description: Person deleted
+        '404':
+          description: Person not found
 
 components:
   schemas:
@@ -83,9 +135,29 @@ components:
           type: string
         note:
           type: string
+        height:
+          type: number
+          format: double
+          minimum: 0
+        weight:
+          type: number
+          format: double
+          minimum: 0
+        bodyFatPercentage:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 100
+        medicalConditions:
+          type: array
+          items:
+            type: string
     GetPersonsApi:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         username:
           type: string
         name:
@@ -110,3 +182,22 @@ components:
           type: string
         note:
           type: string
+        height:
+          type: number
+          format: double
+        weight:
+          type: number
+          format: double
+        bodyFatPercentage:
+          type: number
+          format: double
+        medicalConditions:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time

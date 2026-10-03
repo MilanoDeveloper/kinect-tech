@@ -1,0 +1,20 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+spring:
+  application:
+    name: kinect-payments
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: payments
+        hbm2ddl:
+          create_namespaces: true
+
