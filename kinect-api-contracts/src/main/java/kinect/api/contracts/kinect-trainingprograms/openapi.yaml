@@ -15,6 +15,20 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TrainingProgramRequest'
+            example:
+              studentId: 1
+              trainerId: 2
+              name: Treino A - Corpo inteiro
+              exercises:
+                - name: Agachamento livre
+                  sets: 3
+                  repetitions: 12
+                  restSeconds: 60
+                  notes: Manter a coluna alinhada
+                - name: Supino reto
+                  sets: 3
+                  repetitions: 10
+                  restSeconds: 90
       responses:
         '201':
           description: Training program created
@@ -32,6 +46,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TrainingProgram'
+              example:
+                - id: 1
+                  studentId: 1
+                  trainerId: 2
+                  name: Treino A - Corpo inteiro
+                  exercises:
+                    - name: Agachamento livre
+                      sets: 3
+                      repetitions: 12
+                      restSeconds: 60
+                      notes: Manter a coluna alinhada
+                    - name: Supino reto
+                      sets: 3
+                      repetitions: 10
+                      restSeconds: 90
+                  createdAt: '2026-10-03T12:00:00Z'
+                  updatedAt: '2026-10-03T12:00:00Z'
   /api/v1/training-programs/{trainingProgramId}:
     parameters:
       - name: trainingProgramId
@@ -40,6 +71,7 @@ paths:
         schema:
           type: integer
           format: int64
+        example: 1
     get:
       summary: Get training program by id
       operationId: getTrainingProgramById
@@ -52,6 +84,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TrainingProgram'
+              example:
+                id: 1
+                studentId: 1
+                trainerId: 2
+                name: Treino A - Corpo inteiro
+                exercises:
+                  - name: Agachamento livre
+                    sets: 3
+                    repetitions: 12
+                    restSeconds: 60
+                    notes: Manter a coluna alinhada
+                  - name: Supino reto
+                    sets: 3
+                    repetitions: 10
+                    restSeconds: 90
+                createdAt: '2026-10-03T12:00:00Z'
+                updatedAt: '2026-10-03T12:00:00Z'
         '404':
           description: Training program not found
     put:
@@ -65,6 +114,20 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TrainingProgramRequest'
+            example:
+              studentId: 1
+              trainerId: 2
+              name: Treino A - Corpo inteiro
+              exercises:
+                - name: Agachamento livre
+                  sets: 3
+                  repetitions: 12
+                  restSeconds: 60
+                  notes: Manter a coluna alinhada
+                - name: Supino reto
+                  sets: 3
+                  repetitions: 10
+                  restSeconds: 90
       responses:
         '204':
           description: Training program updated
@@ -93,12 +156,15 @@ components:
         studentId:
           type: integer
           format: int64
+          example: 1
         trainerId:
           type: integer
           format: int64
+          example: 2
         name:
           type: string
           maxLength: 120
+          example: Treino A - Corpo inteiro
         exercises:
           type: array
           items:
@@ -111,18 +177,23 @@ components:
         name:
           type: string
           maxLength: 120
+          example: Agachamento livre
         sets:
           type: integer
           minimum: 1
+          example: 3
         repetitions:
           type: integer
           minimum: 1
+          example: 12
         restSeconds:
           type: integer
           minimum: 0
+          example: 60
         notes:
           type: string
           maxLength: 500
+          example: Manter a coluna alinhada
     TrainingProgram:
       allOf:
         - $ref: '#/components/schemas/TrainingProgramRequest'
@@ -131,9 +202,12 @@ components:
             id:
               type: integer
               format: int64
+              example: 1
             createdAt:
               type: string
               format: date-time
+              example: '2026-10-03T12:00:00Z'
             updatedAt:
               type: string
               format: date-time
+              example: '2026-10-03T12:00:00Z'

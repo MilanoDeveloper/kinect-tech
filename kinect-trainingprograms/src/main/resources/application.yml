@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: kinect-trainingprograms
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -18,3 +20,24 @@ spring:
         hbm2ddl:
           create_namespaces: true
 
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

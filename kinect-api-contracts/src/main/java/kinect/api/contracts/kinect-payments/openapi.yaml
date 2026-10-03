@@ -15,6 +15,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PaymentRequest'
+            example:
+              personId: 1
+              amount: 149.90
+              method: PIX
+              installmentCount: 1
+              dueDate: '2026-11-03'
+              status: PENDING
+              description: Mensalidade da academia
       responses:
         '201':
           description: Payment created
@@ -32,6 +40,17 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Payment'
+              example:
+                - id: 1
+                  personId: 1
+                  amount: 149.90
+                  method: PIX
+                  installmentCount: 1
+                  dueDate: '2026-11-03'
+                  status: PENDING
+                  description: Mensalidade da academia
+                  createdAt: '2026-10-03T12:00:00Z'
+                  updatedAt: '2026-10-03T12:00:00Z'
   /api/v1/payments/{paymentId}:
     parameters:
       - name: paymentId
@@ -40,6 +59,7 @@ paths:
         schema:
           type: integer
           format: int64
+        example: 1
     get:
       summary: Get payment by id
       operationId: getPaymentById
@@ -52,6 +72,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Payment'
+              example:
+                id: 1
+                personId: 1
+                amount: 149.90
+                method: PIX
+                installmentCount: 1
+                dueDate: '2026-11-03'
+                status: PENDING
+                description: Mensalidade da academia
+                createdAt: '2026-10-03T12:00:00Z'
+                updatedAt: '2026-10-03T12:00:00Z'
         '404':
           description: Payment not found
     put:
@@ -65,6 +96,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PaymentRequest'
+            example:
+              personId: 1
+              amount: 149.90
+              method: PIX
+              installmentCount: 1
+              dueDate: '2026-11-03'
+              status: PENDING
+              description: Mensalidade da academia
       responses:
         '204':
           description: Payment updated
@@ -93,19 +132,24 @@ components:
         personId:
           type: integer
           format: int64
+          example: 1
         amount:
           type: number
           minimum: 0
+          example: 149.90
         method:
           type: string
           enum: [CREDIT, DEBIT, CASH, PIX]
+          example: PIX
         installmentCount:
           type: integer
           minimum: 1
           default: 1
+          example: 1
         dueDate:
           type: string
           format: date
+          example: '2026-11-03'
         paidAt:
           type: string
           format: date-time
@@ -113,9 +157,11 @@ components:
           type: string
           enum: [PENDING, PAID, OVERDUE, CANCELLED]
           default: PENDING
+          example: PENDING
         description:
           type: string
           maxLength: 255
+          example: Mensalidade da academia
     Payment:
       allOf:
         - $ref: '#/components/schemas/PaymentRequest'
@@ -124,9 +170,12 @@ components:
             id:
               type: integer
               format: int64
+              example: 1
             createdAt:
               type: string
               format: date-time
+              example: '2026-10-03T12:00:00Z'
             updatedAt:
               type: string
               format: date-time
+              example: '2026-10-03T12:00:00Z'

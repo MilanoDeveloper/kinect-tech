@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: kinect-persons
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -18,3 +20,10 @@ spring:
         hbm2ddl:
           create_namespaces: true
 
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html

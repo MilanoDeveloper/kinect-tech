@@ -6,7 +6,7 @@ Plataforma de gestão de academia estruturada em microserviços, com contratos A
 
 | Módulo | Responsabilidade | Porta local | Schema PostgreSQL |
 |---|---|---:|---|
-| `kinect-orchestrator` | BFF; encaminha chamadas para os serviços | 8080 | — |
+| `kinect-orchestrator` | API BFF; implementa os casos de uso e coordena chamadas entre serviços | 8080 | — |
 | `kinect-persons` | Cadastro, medidas e condições de saúde de alunos e profissionais | 8081 | `persons` |
 | `kinect-payments` | Pagamentos, método, parcelas, vencimento e liquidação | 8082 | `payments` |
 | `kinect-trainingprograms` | Treinos, exercícios, aluno e personal responsável | 8083 | `trainingprograms` |
@@ -40,7 +40,7 @@ mvn -f kinect-trainingprograms\pom.xml spring-boot:run "-Dspring-boot.run.profil
 mvn -f kinect-orchestrator\pom.xml spring-boot:run "-Dspring-boot.run.profiles=local"
 ```
 
-O BFF encaminha as rotas abaixo aos serviços correspondentes; as mesmas rotas também estão disponíveis diretamente nos serviços:
+O BFF expõe as rotas abaixo e implementa o CRUD coordenando os serviços responsáveis. Ele não persiste cópias locais: cadastros de pessoas vão para `kinect-persons`, pagamentos para `kinect-payments` e treinos para `kinect-trainingprograms`.
 
 | Recurso | Rotas |
 |---|---|
@@ -50,4 +50,17 @@ O BFF encaminha as rotas abaixo aos serviços correspondentes; as mesmas rotas t
 
 `POST` cria (`201`), `GET` lista ou consulta por id, `PUT` substitui os dados (`204`) e `DELETE` remove (`204`). Consultas ou alterações de ids inexistentes retornam `404`.
 
+Ao criar/atualizar um pagamento ou treino pelo BFF, informe `personId` ou `studentId` no corpo. O orquestrador consulta `kinect-persons` primeiro; se a pessoa não existir, responde `404` e não encaminha a gravação. Se existir, encaminha os dados ao serviço dono do recurso. Assim, a associação entre pessoa e pagamento/treino usa o id, sem compartilhar tabelas entre schemas.
+
 Os contratos OpenAPI em `kinect-api-contracts/src/main/java/kinect/api/contracts/` são a fonte das interfaces implementadas pelos controllers inbound.
+
+## Documentação Swagger
+
+O Swagger UI está disponível em cada aplicação:
+
+| Aplicação | Swagger UI | Especificação OpenAPI |
+|---|---|---|
+| Orchestrator | `http://localhost:8080/swagger-ui.html` | `http://localhost:8080/v3/api-docs` |
+| Persons | `http://localhost:8081/swagger-ui.html` | `http://localhost:8081/v3/api-docs` |
+| Payments | `http://localhost:8082/swagger-ui.html` | `http://localhost:8082/v3/api-docs` |
+| Training Programs | `http://localhost:8083/swagger-ui.html` | `http://localhost:8083/v3/api-docs` |
