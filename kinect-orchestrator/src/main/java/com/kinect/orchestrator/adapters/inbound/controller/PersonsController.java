@@ -1,6 +1,6 @@
 package com.kinect.orchestrator.adapters.inbound.controller;
 
-import com.kinect.contracts.persons.api.PersonsApi;
+import com.kinect.contracts.orchestrator.api.PersonsApi;
 import com.kinect.contracts.persons.dto.CreatePersonRequest;
 import com.kinect.contracts.persons.dto.GetPersonsApi;
 import com.kinect.orchestrator.application.port.in.GymOperationsUseCase;

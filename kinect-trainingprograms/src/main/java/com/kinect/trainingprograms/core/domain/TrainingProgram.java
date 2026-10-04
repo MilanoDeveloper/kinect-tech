@@ -1,6 +1,6 @@
 package com.kinect.trainingprograms.core.domain;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public record TrainingProgram(
@@ -9,6 +9,6 @@ public record TrainingProgram(
         Long trainerId,
         String name,
         List<Exercise> exercises,
-        OffsetDateTime createdAt,
-        OffsetDateTime updatedAt) {
+        LocalDate createdAt,
+        LocalDate updatedAt) {
 }

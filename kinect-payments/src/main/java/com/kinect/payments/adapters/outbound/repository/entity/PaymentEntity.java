@@ -6,7 +6,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "payments", schema = "payments")
@@ -31,7 +30,7 @@ public class PaymentEntity {
     private LocalDate dueDate;
 
     @Column(name = "paid_at")
-    private OffsetDateTime paidAt;
+    private LocalDate paidAt;
 
     @Column(nullable = false, length = 20)
     private String status;
@@ -41,11 +40,11 @@ public class PaymentEntity {
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
-    private OffsetDateTime createdAt;
+    private LocalDate createdAt;
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    private OffsetDateTime updatedAt;
+    private LocalDate updatedAt;
 
     public Long getId() { return id; }
     public Long getPersonId() { return personId; }
@@ -58,12 +57,12 @@ public class PaymentEntity {
     public void setInstallmentCount(Integer installmentCount) { this.installmentCount = installmentCount; }
     public LocalDate getDueDate() { return dueDate; }
     public void setDueDate(LocalDate dueDate) { this.dueDate = dueDate; }
-    public OffsetDateTime getPaidAt() { return paidAt; }
-    public void setPaidAt(OffsetDateTime paidAt) { this.paidAt = paidAt; }
+    public LocalDate getPaidAt() { return paidAt; }
+    public void setPaidAt(LocalDate paidAt) { this.paidAt = paidAt; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public OffsetDateTime getUpdatedAt() { return updatedAt; }
+    public LocalDate getCreatedAt() { return createdAt; }
+    public LocalDate getUpdatedAt() { return updatedAt; }
 }
