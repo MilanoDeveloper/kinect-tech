@@ -40,3 +40,5 @@ kinect-persons/src/main/resources/application-local.yml
 kinect-trainingprograms/src/main/resources/application-local.yml
 .idea/kinect-tech.iml
 .idea/workspace.xml
+start-local.txt
+database/convert-varchar-columns-to-text.sql

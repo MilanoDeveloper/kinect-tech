@@ -10,10 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
 public class TrainingProgramController implements TrainingProgramsApi {
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     private final TrainingProgramUseCase useCase;
 
     public TrainingProgramController(TrainingProgramUseCase useCase) {
@@ -83,8 +87,12 @@ public class TrainingProgramController implements TrainingProgramsApi {
         response.setTrainerId(program.trainerId());
         response.setName(program.name());
         response.setExercises(exercises);
-        response.setCreatedAt(program.createdAt());
-        response.setUpdatedAt(program.updatedAt());
+        response.setCreatedAt(formatDate(program.createdAt()));
+        response.setUpdatedAt(formatDate(program.updatedAt()));
         return response;
+    }
+
+    private String formatDate(LocalDate date) {
+        return date == null ? null : date.format(DATE_FORMAT);
     }
 }

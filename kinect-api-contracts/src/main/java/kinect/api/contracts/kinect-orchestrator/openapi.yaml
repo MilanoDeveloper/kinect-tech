@@ -26,7 +26,7 @@ paths:
               username: maria.silva
               password: SenhaSegura123
               name: Maria Silva
-              birthDate: '12041995'
+              birthDate: '12-04-1995'
               gender: F
               personType: ALUNO
               cpf: '52998224725'
@@ -62,7 +62,7 @@ paths:
                 - id: 1
                   username: maria.silva
                   name: Maria Silva
-                  birthDate: '12041995'
+                  birthDate: '12-04-1995'
                   gender: F
                   personType: ALUNO
                   cpf: '52998224725'
@@ -72,8 +72,8 @@ paths:
                   weight: 64.5
                   bodyFatPercentage: 22.4
                   medicalConditions: []
-                  createdAt: '03102026'
-                  updatedAt: '03102026'
+                  createdAt: '03-10-2026'
+                  updatedAt: '03-10-2026'
         '502':
           description: A downstream service is unavailable
   /api/v1/persons/{personId}:
@@ -100,7 +100,7 @@ paths:
                 id: 1
                 username: maria.silva
                 name: Maria Silva
-                birthDate: '12041995'
+                birthDate: '12-04-1995'
                 gender: F
                 personType: ALUNO
                 cpf: '52998224725'
@@ -110,8 +110,8 @@ paths:
                 weight: 64.5
                 bodyFatPercentage: 22.4
                 medicalConditions: []
-                createdAt: '03102026'
-                updatedAt: '03102026'
+                createdAt: '03-10-2026'
+                updatedAt: '03-10-2026'
         '404':
           description: Person not found
         '502':
@@ -130,7 +130,7 @@ paths:
               username: maria.silva
               password: SenhaSegura123
               name: Maria Silva
-              birthDate: '12041995'
+              birthDate: '12-04-1995'
               gender: F
               personType: ALUNO
               cpf: '52998224725'
@@ -176,7 +176,7 @@ paths:
               amount: 149.90
               method: PIX
               installmentCount: 1
-              dueDate: '03112026'
+              dueDate: '03-11-2026'
               status: PENDING
               description: Mensalidade da academia
       responses:
@@ -205,11 +205,11 @@ paths:
                   amount: 149.90
                   method: PIX
                   installmentCount: 1
-                  dueDate: '03112026'
+                  dueDate: '03-11-2026'
                   status: PENDING
                   description: Mensalidade da academia
-                  createdAt: '03102026'
-                  updatedAt: '03102026'
+                  createdAt: '03-10-2026'
+                  updatedAt: '03-10-2026'
         '502':
           description: A downstream service is unavailable
   /api/v1/payments/{paymentId}:
@@ -238,11 +238,11 @@ paths:
                 amount: 149.90
                 method: PIX
                 installmentCount: 1
-                dueDate: '03112026'
+                dueDate: '03-11-2026'
                 status: PENDING
                 description: Mensalidade da academia
-                createdAt: '03102026'
-                updatedAt: '03102026'
+                createdAt: '03-10-2026'
+                updatedAt: '03-10-2026'
         '404':
           description: Person or payment not found
         '502':
@@ -262,7 +262,7 @@ paths:
               amount: 149.90
               method: PIX
               installmentCount: 1
-              dueDate: '03112026'
+              dueDate: '03-11-2026'
               status: PENDING
               description: Mensalidade da academia
       responses:
@@ -343,8 +343,8 @@ paths:
                       sets: 3
                       repetitions: 10
                       restSeconds: 90
-                  createdAt: '03102026'
-                  updatedAt: '03102026'
+                  createdAt: '03-10-2026'
+                  updatedAt: '03-10-2026'
         '502':
           description: A downstream service is unavailable
   /api/v1/training-programs/{trainingProgramId}:
@@ -382,8 +382,8 @@ paths:
                     sets: 3
                     repetitions: 10
                     restSeconds: 90
-                createdAt: '03102026'
-                updatedAt: '03102026'
+                createdAt: '03-10-2026'
+                updatedAt: '03-10-2026'
         '404':
           description: Training program not found
         '502':
@@ -451,8 +451,7 @@ components:
           example: Maria Silva
         birthDate:
           type: string
-          format: date
-          example: '12041995'
+          example: '12-04-1995'
         gender:
           type: string
           enum: [M, F]
@@ -515,8 +514,7 @@ components:
           example: Maria Silva
         birthDate:
           type: string
-          format: date
-          example: '12041995'
+          example: '12-04-1995'
         gender:
           type: string
           enum: [M, F]
@@ -560,12 +558,10 @@ components:
           example: []
         createdAt:
           type: string
-          format: date
-          example: '03102026'
+          example: '03-10-2026'
         updatedAt:
           type: string
-          format: date
-          example: '03102026'
+          example: '03-10-2026'
     PaymentRequest:
       type: object
       required: [personId, amount, method, dueDate]
@@ -589,11 +585,10 @@ components:
           example: 1
         dueDate:
           type: string
-          format: date
-          example: '03112026'
+          example: '03-11-2026'
         paidAt:
           type: string
-          format: date
+          example: '03-11-2026'
         status:
           type: string
           enum: [PENDING, PAID, OVERDUE, CANCELLED]
@@ -604,22 +599,51 @@ components:
           maxLength: 255
           example: Mensalidade da academia
     Payment:
-      allOf:
-        - $ref: '#/components/schemas/PaymentRequest'
-        - type: object
-          properties:
-            id:
-              type: integer
-              format: int64
-              example: 1
-            createdAt:
-              type: string
-              format: date
-              example: '03102026'
-            updatedAt:
-              type: string
-              format: date
-              example: '03102026'
+      type: object
+      required: [id, personId, amount, method, dueDate]
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        personId:
+          type: integer
+          format: int64
+          example: 1
+        amount:
+          type: number
+          minimum: 0
+          example: 149.90
+        method:
+          type: string
+          enum: [CREDIT, DEBIT, CASH, PIX]
+          example: PIX
+        installmentCount:
+          type: integer
+          minimum: 1
+          default: 1
+          example: 1
+        dueDate:
+          type: string
+          example: '03-11-2026'
+        paidAt:
+          type: string
+          example: '03-11-2026'
+        status:
+          type: string
+          enum: [PENDING, PAID, OVERDUE, CANCELLED]
+          default: PENDING
+          example: PENDING
+        description:
+          type: string
+          maxLength: 255
+          example: Mensalidade da academia
+        createdAt:
+          type: string
+          example: '03-10-2026'
+        updatedAt:
+          type: string
+          example: '03-10-2026'
     TrainingProgramRequest:
       type: object
       required: [studentId, trainerId, name, exercises]
@@ -675,9 +699,7 @@ components:
               example: 1
             createdAt:
               type: string
-              format: date
-              example: '03102026'
+              example: '03-10-2026'
             updatedAt:
               type: string
-              format: date
-              example: '03102026'
+              example: '03-10-2026'

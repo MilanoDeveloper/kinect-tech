@@ -17,7 +17,8 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class LocalDateJacksonConfiguration {
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("ddMMuuuu");
+    private static final DateTimeFormatter DASHED_DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-uuuu");
+    private static final DateTimeFormatter COMPACT_DATE_FORMAT = DateTimeFormatter.ofPattern("ddMMuuuu");
 
     @Bean
     public JacksonModule localDateModule() {
@@ -26,13 +27,20 @@ public class LocalDateJacksonConfiguration {
             @Override
             public void serialize(LocalDate value, JsonGenerator generator, SerializationContext context)
                     throws JacksonException {
-                generator.writeString(DATE_FORMAT.format(value));
+                generator.writeString(DASHED_DATE_FORMAT.format(value));
             }
         });
         module.addDeserializer(LocalDate.class, new ValueDeserializer<>() {
             @Override
             public LocalDate deserialize(JsonParser parser, DeserializationContext context) throws JacksonException {
-                return LocalDate.parse(parser.getString(), DATE_FORMAT);
+                String value = parser.getString();
+                if (value.length() == 10 && value.charAt(2) == '-') {
+                    return LocalDate.parse(value, DASHED_DATE_FORMAT);
+                }
+                if (value.length() == 10 && value.charAt(4) == '-') {
+                    return LocalDate.parse(value, DateTimeFormatter.ISO_LOCAL_DATE);
+                }
+                return LocalDate.parse(value, COMPACT_DATE_FORMAT);
             }
         });
         return module;

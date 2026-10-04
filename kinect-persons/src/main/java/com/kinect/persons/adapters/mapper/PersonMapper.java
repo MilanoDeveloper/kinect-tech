@@ -6,7 +6,6 @@ import com.kinect.persons.adapters.outbound.repository.entity.PersonEntity;
 import com.kinect.persons.core.domain.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
 public interface PersonMapper {
@@ -21,5 +20,8 @@ public interface PersonMapper {
 
     Person toDomain(PersonEntity entity);
 
+    @Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
+    @Mapping(target = "createdAt", source = "createdAt", dateFormat = "dd-MM-yyyy")
+    @Mapping(target = "updatedAt", source = "updatedAt", dateFormat = "dd-MM-yyyy")
     GetPersonsApi toResponse(Person person);
 }
